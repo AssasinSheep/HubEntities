@@ -1,0 +1,220 @@
+package gravity;
+
+import org.bukkit.Effect;
+import org.bukkit.Location;
+import org.bukkit.Server;
+import org.bukkit.Sound;
+import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Chicken;
+import org.bukkit.entity.Cow;
+import org.bukkit.entity.Creeper;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Pig;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Spider;
+import org.bukkit.entity.Zombie;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
+
+public class FlyingAnimals
+extends JavaPlugin
+implements Listener {
+    String theHub = this.getConfig().getString("World-Name");
+
+    public void onEnable() {
+        this.getServer().getPluginManager().registerEvents((Listener)this, (Plugin)this);
+        this.saveDefaultConfig();
+    }
+
+    public void onDisable() {
+        this.reloadConfig();
+    }
+
+    @EventHandler
+    public void on(PlayerInteractEntityEvent e) {
+        Pig piggy;
+        if (e.getRightClicked() instanceof Pig && !(piggy = (Pig)e.getRightClicked()).isDead()) {
+            Player p = e.getPlayer();
+            if (piggy.getName().equalsIgnoreCase("Animal") && piggy.getWorld().getName().equals(this.theHub)) {
+                Vector vel = piggy.getVelocity();
+                piggy.setVelocity(new Vector(vel.getX(), 0.8, vel.getZ()));
+                Location loc = piggy.getLocation();
+                World world = p.getWorld();
+                world.playEffect(loc, Effect.SMOKE, 9000);
+                loc.getWorld().playEffect(loc, Effect.LAVA_POP, 20000);
+                world.playEffect(loc, Effect.LAVA_POP, 90000);
+                world.playSound(p.getLocation(), Sound.ENTITY_PIG_AMBIENT, 10.0f, 1.0f);
+            } else {
+                Vector vel2 = piggy.getVelocity();
+                piggy.setVelocity(new Vector(vel2.getX(), 0.0, vel2.getZ()));
+                return;
+            }
+        }
+    }
+
+    @EventHandler
+    public void sheep(PlayerInteractEntityEvent e) {
+        if (e.getRightClicked() instanceof Sheep) {
+            Sheep shep = (Sheep)e.getRightClicked();
+            Player p = e.getPlayer();
+            if (!shep.isDead() && shep.getName().equalsIgnoreCase("Animal") && shep.getWorld().getName().equals(this.theHub)) {
+                Vector vel = shep.getVelocity();
+                shep.setVelocity(new Vector(vel.getX(), 0.8, vel.getZ()));
+                Location locSheep = shep.getLocation();
+                World world = p.getWorld();
+                world.playEffect(locSheep, Effect.SMOKE, 9000);
+                locSheep.getWorld().playEffect(locSheep, Effect.LAVA_POP, 20000);
+                world.playEffect(locSheep, Effect.LAVA_POP, 90000);
+                world.playSound(p.getLocation(), Sound.ENTITY_SHEEP_AMBIENT, 10.0f, 1.0f);
+            } else {
+                Vector vel2 = shep.getVelocity();
+                shep.setVelocity(new Vector(vel2.getX(), 0.0, vel2.getZ()));
+                return;
+            }
+        }
+    }
+
+    @EventHandler
+    public void Chicken(PlayerInteractEntityEvent e) {
+        if (e.getRightClicked() instanceof Chicken) {
+            Chicken chick = (Chicken)e.getRightClicked();
+            Player p = e.getPlayer();
+            if (!chick.isDead() && chick.getName().equalsIgnoreCase("Animal") && chick.getWorld().getName().equals(this.theHub)) {
+                Vector vel = chick.getVelocity();
+                chick.setVelocity(new Vector(vel.getX(), 0.8, vel.getZ()));
+                Location locSheep = chick.getLocation();
+                World world = p.getWorld();
+                world.playEffect(locSheep, Effect.SMOKE, 9000);
+                locSheep.getWorld().playEffect(locSheep, Effect.LAVA_POP, 20000);
+                world.playEffect(locSheep, Effect.LAVA_POP, 90000);
+                world.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_AMBIENT, 10.0f, 1.0f);
+            } else {
+                Vector vel2 = chick.getVelocity();
+                chick.setVelocity(new Vector(vel2.getX(), 0.0, vel2.getZ()));
+                return;
+            }
+        }
+    }
+
+    @EventHandler
+    public void Cow(PlayerInteractEntityEvent e) {
+        if (e.getRightClicked() instanceof Cow) {
+            Cow co = (Cow)e.getRightClicked();
+            Player p = e.getPlayer();
+            if (!co.isDead() && co.getName().equalsIgnoreCase("Animal") && co.getWorld().getName().equals(this.theHub)) {
+                Vector vel = co.getVelocity();
+                co.setVelocity(new Vector(vel.getX(), 0.8, vel.getZ()));
+                World world = p.getWorld();
+                Location locCow = co.getLocation();
+                world.playEffect(locCow, Effect.SMOKE, 9000);
+                locCow.getWorld().playEffect(locCow, Effect.LAVA_POP, 20000);
+                world.playEffect(locCow, Effect.LAVA_POP, 90000);
+                world.playSound(p.getLocation(), Sound.ENTITY_COW_AMBIENT, 10.0f, 1.0f);
+            } else {
+                Vector vel2 = co.getVelocity();
+                co.setVelocity(new Vector(vel2.getX(), 0.0, vel2.getZ()));
+                return;
+            }
+        }
+    }
+
+    @EventHandler
+    public void Skeleton(PlayerInteractEntityEvent e) {
+        Skeleton skel;
+        if (e.getRightClicked() instanceof Skeleton && !(skel = (Skeleton)e.getRightClicked()).isDead()) {
+            Player p = e.getPlayer();
+            if (skel.getName().equalsIgnoreCase("Monster") && skel.getWorld().getName().equals(this.theHub)) {
+                Vector vel = skel.getVelocity();
+                skel.setVelocity(new Vector(vel.getX(), 0.8, vel.getZ()));
+                Location loc = skel.getLocation();
+                World world = p.getWorld();
+                world.playEffect(loc, Effect.SMOKE, 9000);
+                loc.getWorld().playEffect(loc, Effect.LAVA_POP, 20000);
+                world.playEffect(loc, Effect.LAVA_POP, 90000);
+                world.playSound(p.getLocation(), Sound.ENTITY_SKELETON_HURT, 10.0f, 1.0f);
+            } else {
+                Vector vel2 = skel.getVelocity();
+                skel.setVelocity(new Vector(vel2.getX(), 0.0, vel2.getZ()));
+                return;
+            }
+        }
+    }
+
+    @EventHandler
+    public void Zombie(PlayerInteractEntityEvent e) {
+        Zombie zom;
+        if (e.getRightClicked() instanceof Zombie && !(zom = (Zombie)e.getRightClicked()).isDead()) {
+            Player p = e.getPlayer();
+            if (zom.getName().equalsIgnoreCase("Monster")) {
+                if (zom.getWorld().getName().equals(this.theHub)) {
+                    Vector vel = zom.getVelocity();
+                    zom.setVelocity(new Vector(vel.getX(), 0.8, vel.getZ()));
+                    Location loc = zom.getLocation();
+                    World world = p.getWorld();
+                    world.playEffect(loc, Effect.SMOKE, 9000);
+                    loc.getWorld().playEffect(loc, Effect.LAVA_POP, 20000);
+                    world.playEffect(loc, Effect.LAVA_POP, 90000);
+                    world.playSound(p.getLocation(), Sound.ENTITY_ZOMBIE_HURT, 10.0f, 1.0f);
+                } else {
+                    Vector vel2 = zom.getVelocity();
+                    zom.setVelocity(new Vector(vel2.getX(), 0.0, vel2.getZ()));
+                    return;
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void Creeper(PlayerInteractEntityEvent e) {
+        Creeper creep;
+        if (e.getRightClicked() instanceof Creeper && !(creep = (Creeper)e.getRightClicked()).isDead()) {
+            Player p = e.getPlayer();
+            if (creep.getName().equalsIgnoreCase("Monster") && creep.getWorld().getName().equals(this.theHub)) {
+                Vector vel = creep.getVelocity();
+                creep.setVelocity(new Vector(vel.getX(), 0.8, vel.getZ()));
+                Location loc = creep.getLocation();
+                World world = p.getWorld();
+                world.playEffect(loc, Effect.SMOKE, 9000);
+                loc.getWorld().playEffect(loc, Effect.LAVA_POP, 20000);
+                world.playEffect(loc, Effect.LAVA_POP, 90000);
+                world.playSound(p.getLocation(), Sound.ENTITY_CREEPER_DEATH, 10.0f, 1.0f);
+            } else {
+                Vector vel2 = creep.getVelocity();
+                creep.setVelocity(new Vector(vel2.getX(), 0.0, vel2.getZ()));
+                return;
+            }
+        }
+    }
+
+    @EventHandler
+    public void Spider(PlayerInteractEntityEvent e) {
+        Spider spid;
+        if (e.getRightClicked() instanceof Spider && !(spid = (Spider)e.getRightClicked()).isDead()) {
+            Player p = e.getPlayer();
+            if (spid.getName().equalsIgnoreCase("Monster")) {
+                if (spid.getWorld().getName().equals(this.theHub)) {
+                    Vector vel = spid.getVelocity();
+                    spid.setVelocity(new Vector(vel.getX(), 0.8, vel.getZ()));
+                    Location loc = spid.getLocation();
+                    World world = p.getWorld();
+                    world.playEffect(loc, Effect.SMOKE, 9000);
+                    loc.getWorld().playEffect(loc, Effect.LAVA_POP, 20000);
+                    world.playEffect(loc, Effect.LAVA_POP, 90000);
+                    world.playSound(p.getLocation(), Sound.ENTITY_SPIDER_HURT, 10.0f, 1.0f);
+                } else {
+                    Vector vel2 = spid.getVelocity();
+                    spid.setVelocity(new Vector(vel2.getX(), 0.0, vel2.getZ()));
+                    return;
+                }
+            }
+        }
+    }
+}
